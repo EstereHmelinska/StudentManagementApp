@@ -73,7 +73,7 @@ http://localhost:8080
 * repository → database access
 * entity → database models
 * templates → HTML pages
-* static → CSS / images
+* static → images
 
 ---
 
