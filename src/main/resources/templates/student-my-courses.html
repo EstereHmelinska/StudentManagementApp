@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Enrolled Courses</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #e8eefa;}
+        .container { max-width: 800px; margin: 36px auto; background: white; border-radius: 10px; box-shadow: 0 6px 30px rgba(80,120,150,0.11); padding: 32px;}
+        h2 { color: #214478; margin-bottom: 28px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 24px;}
+        th, td { padding: 12px; border-bottom: 1px solid #e3e6ee;}
+        th { background: #e8eefa; }
+        button {
+            background: #b92228;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #7a181c; }
+        .back-btn {
+            background: #214478;
+            margin-top: 10px;
+            color: #fff;
+            border-radius: 7px;
+            padding: 10px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .back-btn:hover {
+            background: #153057;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>My Enrolled Courses</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Unenroll</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.name}"></td>
+            <td th:text="${course.description}"></td>
+            <td>
+                <form th:action="@{/student/unenroll}" method="post" style="display:inline;">
+                    <input type="hidden" name="courseId" th:value="${course.id}" />
+                    <button type="submit">Unenroll</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/student/dashboard" class="back-btn">Back</a>
+</div>
+</body>
+</html>

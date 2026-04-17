@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f5fa; }
+        .container { max-width: 520px; margin: 60px auto; background: white; border-radius: 10px; box-shadow: 0 6px 30px rgba(80,120,150,0.11); padding: 36px; text-align: center;}
+        h2 { color: #214478; margin-bottom: 18px;}
+        a.button { display: block; background: #214478; color: #fff; padding: 12px; border-radius: 8px; text-decoration: none; margin: 12px auto; width: 70%; font-size: 1.1rem; font-weight: bold;}
+        a.button:hover { background: #153057; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Welcome, <span th:text="${studentName}">Student</span>!</h2>
+    <a class="button" href="/student/courses">View & Enroll in Courses</a>
+    <a class="button" href="/student/my-courses">My Enrolled Courses</a>
+    <a class="button" href="/student/profile">Edit Profile</a>
+    <a class="button" href="/logout" style="background:#888;">Logout</a>
+</div>
+</body>
+</html>

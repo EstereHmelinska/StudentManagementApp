@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${course.id != null} ? 'Edit Course' : 'Add Course'"></title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #e8eefa; margin: 0;}
+        .form-container { max-width: 440px; margin: 48px auto; background: white; padding: 32px 24px 24px 24px; border-radius: 12px; box-shadow: 0 8px 28px rgba(50,60,100,0.12); }
+        h2 { color: #214478; margin-bottom: 18px; }
+        label { display: block; margin-top: 16px; margin-bottom: 4px; color: #444; }
+        input[type="text"], textarea {
+            width: 98%; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #bcd0e5;
+        }
+        textarea { resize: vertical; min-height: 52px; }
+        button { background: #214478; color: #fff; border: none; padding: 11px 22px; border-radius: 7px; font-weight: bold; cursor: pointer; margin-top: 14px; transition: background 0.2s;}
+        button:hover { background: #153057; }
+        .back-btn { margin-left: 12px; background: #888;}
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2 th:text="${course.id != null} ? 'Edit Course' : 'Add Course'"></h2>
+    <form th:action="@{/admin/courses/save}" th:object="${course}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <label>Course Name:</label>
+        <input type="text" th:field="*{name}" required />
+
+        <label>Description:</label>
+        <textarea th:field="*{description}" required></textarea>
+
+        <label>Image Path (relative to /images):</label>
+        <input type="text" th:field="*{imagePath}" placeholder="/images/java.jpg" />
+
+        <button type="submit">Save</button>
+        <a href="/admin/courses" class="button back-btn">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

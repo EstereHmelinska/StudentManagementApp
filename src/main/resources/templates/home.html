@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to ViA e-studies!</title>
+    <style>
+        body {
+            background-image: url('/images/university.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .overlay {
+            background: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 100px auto 0 auto;
+            padding: 40px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        h1 {
+            font-size: 2.8rem;
+            color: #214478;
+        }
+        a {
+            display: inline-block;
+            margin: 20px 12px;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 8px;
+            background: #214478;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        a:hover {
+            background: #153057;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>Welcome to ViA e-studies!</h1>
+		<p style="font-size: 1.35em; font-weight: 500; margin-bottom: 34px;">
+		    Manage Your Studies Easily
+		</p>
+        <a href="/login">Login</a>
+    </div>
+</body>
+</html>

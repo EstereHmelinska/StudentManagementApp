@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Courses</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #e8eefa;}
+        .container { max-width: 900px; margin: 36px auto; background: white; border-radius: 10px; box-shadow: 0 6px 30px rgba(80,120,150,0.11); padding: 32px;}
+        h2 { color: #214478; margin-bottom: 24px;}
+        table { width: 100%; border-collapse: collapse; margin-bottom: 18px;}
+        th, td { padding: 10px; border-bottom: 1px solid #e3e6ee; vertical-align: middle;}
+        th { background: #e8eefa;}
+        form.inline { display: inline;}
+        .searchbar { margin-bottom: 20px;}
+        input[type="text"] { padding: 6px; border-radius: 5px; border: 1px solid #bcd0e5; margin-right: 10px;}
+        button, a.button { background: #214478; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer;}
+        button:hover, a.button:hover { background: #153057;}
+        .enrolled { background: #74c67a;}
+        .img-thumb { height: 48px; border-radius: 7px; margin-right: 12px; vertical-align: middle; }
+        .course-name { vertical-align: middle; font-size: 1.1em; font-weight: 600; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Available Courses</h2>
+    <form th:action="@{/student/courses}" method="get" class="searchbar">
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="Search courses..." />
+        <button type="submit">Search</button>
+        <a href="/student/dashboard" class="button" style="background:#888;">Back</a>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Description</th>
+                <th>Enroll</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+			<td>
+			    <div style="display:flex; align-items:center;">
+			        <img th:if="${course.imagePath != null}" th:src="@{${course.imagePath}}" alt="Course Image" class="img-thumb" />
+			        <span th:text="${course.name}" class="course-name" style="white-space:normal; word-break:break-word;"></span>
+			    </div>
+			</td>
+            <td th:text="${course.description}"></td>
+            <td>
+                <form th:action="@{/student/enroll}" method="post" class="inline">
+                    <input type="hidden" name="courseId" th:value="${course.id}" />
+                    <button type="submit"
+                            th:disabled="${#lists.contains(enrolledCourseIds, course.id)}"
+                            th:classappend="${#lists.contains(enrolledCourseIds, course.id)} ? 'enrolled' : ''">
+                        <span th:text="${#lists.contains(enrolledCourseIds, course.id) ? 'Enrolled' : 'Enroll'}"></span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

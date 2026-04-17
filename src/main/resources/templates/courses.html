@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Courses</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #e8eefa;}
+        .container { max-width: 900px; margin: 36px auto; background: white; border-radius: 10px; box-shadow: 0 6px 30px rgba(80,120,150,0.11); padding: 32px;}
+        h2 { color: #214478; margin-bottom: 24px;}
+        table { width: 100%; border-collapse: collapse; margin-bottom: 18px;}
+        th, td { padding: 10px; border-bottom: 1px solid #e3e6ee;}
+        th { background: #e8eefa;}
+        a.button {
+            background: #214478; color: #fff; border: none; padding: 8px 18px;
+            border-radius: 6px; text-decoration: none; font-weight: bold; margin-right: 0; transition: background 0.2s;
+            display: inline-block;
+        }
+        a.button:hover { background: #153057; }
+        .add-btn { float: right; margin-bottom: 18px; }
+        img.thumb { height: 44px; border-radius: 7px; margin-right: 10px;}
+        .actions {
+            display: flex;
+            gap: 8px; /* Space between buttons */
+        }
+        .actions .button {
+            margin-right: 0;
+        }
+        .delete-btn {
+            background: #b92228;
+        }
+		.delete-btn:hover {
+		            background: #7a181c;
+		        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Courses</h2>
+    <a href="/admin/courses/new" class="button add-btn">Add Course</a>
+    <form th:action="@{/admin/courses}" method="get" style="margin-bottom:14px;">
+        <input type="text" name="keyword" th:value="${keyword}" placeholder="Search courses..." />
+        <button type="submit" class="button">Search</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td>
+                <img th:if="${course.imagePath != null}" th:src="@{${course.imagePath}}" class="thumb" alt="Course Image" />
+                <span th:text="${course.name}" style="font-weight:600;"></span>
+            </td>
+            <td th:text="${course.description}"></td>
+            <td>
+                <div class="actions">
+                    <a th:href="@{|/admin/courses/edit/${course.id}|}" class="button">Edit</a>
+                    <a th:href="@{|/admin/courses/delete/${course.id}|}" class="button delete-btn">Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/admin/students" class="button" style="background:#888;">Back to Students</a>
+    <a href="/logout" class="button" style="background:#888; margin-left:10px;">Logout</a>
+</div>
+</body>
+</html>

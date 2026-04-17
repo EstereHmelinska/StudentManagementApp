@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Management - Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f2f5fa; margin: 0; }
+        .container { max-width: 900px; margin: 36px auto; background: white; border-radius: 10px; box-shadow: 0 6px 30px rgba(80,120,150,0.15); padding: 32px; }
+        h2 { color: #214478; margin-bottom: 24px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 18px; }
+        th, td { padding: 10px; border-bottom: 1px solid #e3e6ee; text-align: left; }
+        th { background: #e8eefa; }
+        a.button {
+            background: #214478; color: #fff; border: none; padding: 8px 20px;
+            border-radius: 6px; text-decoration: none; font-weight: bold; margin-right: 5px; transition: background 0.2s;
+        }
+        a.button:hover { background: #153057; }
+        .add-btn { float: right; margin-bottom: 18px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Students</h2>
+    <a href="/admin/students/new" class="button add-btn">Add Student</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.user.username}"></td>
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.age}"></td>
+            <td th:text="${student.email}"></td>
+            <td>
+                <a th:href="@{|/admin/students/edit/${student.id}|}" class="button">Edit</a>
+                <a th:href="@{|/admin/students/delete/${student.id}|}" class="button" style="background:#b92228;">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="/admin/courses" class="button">Manage Courses</a>
+    <a href="/logout" class="button" style="background:#888;">Logout</a>
+</div>
+</body>
+</html>

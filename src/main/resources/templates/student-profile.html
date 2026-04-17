@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #e8eefa; margin: 0;}
+        .form-container { max-width: 440px; margin: 48px auto; background: white; padding: 32px 24px 24px 24px; border-radius: 12px; box-shadow: 0 8px 28px rgba(50,60,100,0.12); }
+        h2 { color: #214478; margin-bottom: 18px; }
+        label { display: block; margin-top: 16px; margin-bottom: 4px; color: #444; }
+        input[type="text"], input[type="email"], input[type="number"] {
+            width: 98%; padding: 8px; margin-bottom: 8px; border-radius: 6px; border: 1px solid #bcd0e5;
+        }
+        button { background: #214478; color: #fff; border: none; padding: 11px 22px; border-radius: 7px; font-weight: bold; cursor: pointer; margin-top: 14px; transition: background 0.2s;}
+        button:hover { background: #153057; }
+        .back-btn { margin-left: 12px; background: #888; color: #fff; padding: 11px 22px; border-radius: 7px; text-decoration: none;}
+        .back-btn:hover { background: #444; }
+        .form-row { margin-bottom: 14px; }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2>Edit Profile</h2>
+    <form th:action="@{/student/profile}" th:object="${student}" method="post">
+        <div class="form-row">
+            <label>Name:</label>
+            <input type="text" th:field="*{name}" required />
+        </div>
+        <div class="form-row">
+            <label>Age:</label>
+            <input type="number" th:field="*{age}" min="0" />
+        </div>
+        <div class="form-row">
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" />
+        </div>
+        <button type="submit">Save</button>
+        <a href="/student/dashboard" class="back-btn">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
